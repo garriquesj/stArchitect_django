@@ -18,6 +18,7 @@
   </div>
   <!--  This anchor tag will redirect back to artist list without a query param -->
   <a class="button is-outlined" href="{% url 'architect_list' %}">Clear Search</a>
+  <a class="button is-outlined" href="{% url 'architect_create' %}">Add Artist</a>
 </form>
 <div class="gallery">
   {% for architect in architects %}

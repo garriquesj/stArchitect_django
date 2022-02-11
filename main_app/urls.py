@@ -7,6 +7,7 @@ from django.http import HttpResponse
 urlpatterns = [
     path('', views.Home.as_view(), name="home"),
     path('about/', views.About.as_view(), name="about"),
-    path('architects/', views.ArchitectList.as_view(), name="architect_list")
-
+    path('architects/', views.ArchitectList.as_view(), name="architect_list"),
+    path('architects/new/', views.ArchitectCreate.as_view(), name="architect_create"),
+    path('architects/<int:pk>/', views.ArchitectDetail.as_view(), name="architect_detail")
 ]

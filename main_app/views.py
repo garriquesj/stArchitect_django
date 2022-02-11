@@ -3,6 +3,8 @@ from django.views import View
 from django.http import HttpResponse # <- View class to handle requests
 from django.views.generic.base import TemplateView
 from .models import Architect
+from django.views.generic.edit import CreateView
+from django.views.generic import DetailView
 
 # Now that we have our route established it is time to build out
 #  our view function.
@@ -36,6 +38,16 @@ class ArchitectList(TemplateView):
                         context["header"] = "Top Architects"
                 return context
 
+class ArchitectCreate(CreateView):
+        model = Architect
+        fields = ['name', 'image', 'firm', 'nationality','award','bio']
+        template_name = "architect_create.html"
+        success_url = "/architects/"
+
+
+class ArchitectDetail(DetailView):
+        model = Architect
+        template_name = "architect_detail.html"
 
 # architects = [ 
 #     Architect("Richard Meier","https://archinect.imgix.net/uploads/ea/ea09afa925e45f621f785ecc7c8ab409.jpg?auto=compress%2Cformat", "MeierPartners", "American"," Pritzker 1984, AIA gold medal 1997","Richard Meier is an American abstract artist and architect, whose geometric designs make prominent use of the color white."),
