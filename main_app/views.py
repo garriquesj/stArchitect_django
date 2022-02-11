@@ -22,10 +22,20 @@ class ArchitectList(TemplateView):
         template_name = "architect_list.html"
 
         def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-            context["architects"] = Architect.objects.all() # Here we are using the model to query the database for us.
-            return context
-    
+                context = super().get_context_data(**kwargs)
+# to get the query parameter we have to acccess it in the request.GET dictionary object        
+                name = self.request.GET.get("name")
+# If a query exists we will filter by name 
+                if name != None:
+# .filter is the sql WHERE statement and name__icontains is doing a search for any name that contains the query param
+                        context["architects"] = Architect.objects.filter(name__icontains=name)
+                        context["header"] = f"Searching for {name}"
+                else:
+                        context["architects"] = Architect.objects.all()
+# default header for not searching 
+                        context["header"] = "Top Architects"
+                return context
+
 
 # architects = [ 
 #     Architect("Richard Meier","https://archinect.imgix.net/uploads/ea/ea09afa925e45f621f785ecc7c8ab409.jpg?auto=compress%2Cformat", "MeierPartners", "American"," Pritzker 1984, AIA gold medal 1997","Richard Meier is an American abstract artist and architect, whose geometric designs make prominent use of the color white."),
