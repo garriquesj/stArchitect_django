@@ -4,16 +4,16 @@
     <img src="{{architect.image}}" alt="{{architect.name}}" />
 </div>
 <div class="detail__name">
-    <h1 class="title">{{architect.name}}</h1>
+    <h1 class="title_name">{{architect.name}}</h1>
 </div>
 <div class="detail__container">
     <div class="buttons">
-        <a href="" class="button is-outline">
+        <a href="{% url 'architect_update' architect.pk %}" class="button is-outline">
             <span class="icon">
                 <i class="fas fa-edit"></i>
             </span>
         </a>
-        <a href="" class="button is-outline">
+        <a href="{% url 'architect_delete' architect.pk %}" class="button is-outline">
             <span class="icon">
                 <i class="fas fa-trash-alt"></i>
             </span>
@@ -24,7 +24,7 @@
         <p>{{architect.firm}}</p>
     </div>
     <div class="detail__about">
-        <h4 class="title is-4">Firm</h4>
+        <h4 class="title is-4">Nationality</h4>
         <p>{{architect.nationality}}</p>
     </div>
     <div class="detail__about">

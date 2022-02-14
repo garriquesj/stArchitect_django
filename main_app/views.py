@@ -3,8 +3,9 @@ from django.views import View
 from django.http import HttpResponse # <- View class to handle requests
 from django.views.generic.base import TemplateView
 from .models import Architect
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import DetailView
+from django.urls import reverse
 
 # Now that we have our route established it is time to build out
 #  our view function.
@@ -42,12 +43,27 @@ class ArchitectCreate(CreateView):
         model = Architect
         fields = ['name', 'image', 'firm', 'nationality','award','bio']
         template_name = "architect_create.html"
-        success_url = "/architects/"
+        
+        def get_success_url(self):
+                return reverse('architect_detail', kwargs={'pk': self.object.pk})
 
 
 class ArchitectDetail(DetailView):
         model = Architect
         template_name = "architect_detail.html"
+
+class ArchitectUpdate(UpdateView):
+        model = Architect
+        fields = ['name', 'image', 'firm', 'nationality','award','bio']
+        template_name = "architect_update.html"
+
+        def get_success_url(self):
+                return reverse('architect_detail', kwargs={'pk': self.object.pk})
+        
+class ArchitectDelete(DeleteView):
+        model = Architect
+        template_name = "architect_delete_confirmation.html"
+        success_url = "/architects/"       
 
 # architects = [ 
 #     Architect("Richard Meier","https://archinect.imgix.net/uploads/ea/ea09afa925e45f621f785ecc7c8ab409.jpg?auto=compress%2Cformat", "MeierPartners", "American"," Pritzker 1984, AIA gold medal 1997","Richard Meier is an American abstract artist and architect, whose geometric designs make prominent use of the color white."),
@@ -58,7 +74,7 @@ class ArchitectDetail(DetailView):
 # class ArchitectList(TemplateView):
 #     template_name = "architect_list.html"
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context["architects"] = architects # this is where we add the key into our context object for the view to use
-    #     return context
+# def get_context_data(self, **kwargs):
+#     context = super().get_context_data(**kwargs)
+#     context["architects"] = architects # this is where we add the key into our context object for the view to use
+#     return context
