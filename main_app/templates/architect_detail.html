@@ -19,6 +19,28 @@
             </span>
         </a>
     </div>
+    <h3 class="title is-4">Buildings</h3>
+    <div class="detail__buildings mb-5">
+        
+    
+        {% for building in architect.buildings.all %}
+        
+            <div class="image">
+            <img class="building_image is-square" src="{{building.image}}" alt="{{building.name}}">
+            <span>{{forloop.counter}}
+                <b>{{building.name}}</b>
+                {{building.location}}</span>
+        </div>
+            {% empty %}
+        <article class="message is-black">
+        <div class="message-header">
+            <p>No buildings listed</p>
+        </div>
+    </div>
+        </article>
+    
+        {% endfor %}
+    </div>
     <div class="detail__about">
         <h4 class="title is-4">Firm</h4>
         <p>{{architect.firm}}</p>
