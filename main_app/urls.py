@@ -2,6 +2,8 @@ from django.urls import path
 from . import views
 from django.views.generic.base import TemplateView
 from django.http import HttpResponse
+from django.views.generic import DetailView
+
 
 # define all routes
 urlpatterns = [

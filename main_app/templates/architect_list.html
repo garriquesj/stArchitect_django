@@ -16,13 +16,13 @@
       <input class="button is-outlined" type="submit" value="Search" />
     </div>
   </div>
-  <!--  This anchor tag will redirect back to artist list without a query param -->
+  <!--  This anchor tag will redirect back to architect list without a query param -->
   <a class="button is-outlined" href="{% url 'architect_list' %}">Clear Search</a>
-  <a class="button is-outlined" href="{% url 'architect_create' %}">Add Artist</a>
+  <a class="button is-outlined" href="{% url 'architect_create' %}">Add Architect</a>
 </form>
 <div class="gallery">
   {% for architect in architects %}
-  <a href="">
+  <a href="{% url 'architect_detail' architect.pk %}">
     <div class="card">
       <div class="card-image">
         <figure class="image is-square">
@@ -36,5 +36,4 @@
   </a>
   {% endfor %}
 </div>
-
 {% endblock %}
